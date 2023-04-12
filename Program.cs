@@ -107,9 +107,9 @@ namespace csharp_biblioteca
     }
     public class Biblioteca
     {
-        private List<Documento> documenti = new List<Documento>();
-        private List<Utente> utenti = new List<Utente>();
-        private List<Prestito> prestiti = new List<Prestito>();
+        private List<Documento> documenti;
+        private List<Utente> utenti;
+        private List<Prestito> prestiti;
 
         public Biblioteca()
         {
@@ -138,7 +138,7 @@ namespace csharp_biblioteca
         {
             foreach (Documento documento in documenti)
             {
-                if (documento.id == id) ;
+                if (documento.id == id)
                 return documento;
             }
             return null;
@@ -172,36 +172,29 @@ namespace csharp_biblioteca
             biblioteca.AggiungiUtente(utente1);
 
             Libro libro2 = new Libro("50055", "valle e monti", "letteratura", 16, "umberto", "eco", 587);
-            Libro libro3 = new Libro("50057", "il rosa", "letteratura", 15, "umberto", "eco", 982);
-                        
+            Libro libro3 = new Libro("50057", "il rosa", "letteratura", 15, "umberto", "eco", 982);       
             Libro libro1 = new Libro("50059", "il nome della rosa", "letteratura", 19, "umberto", "eco", 1205);
-            biblioteca.AggiungiDocumento(libro3);
-            biblioteca.AggiungiDocumento(libro2);
+
             biblioteca.AggiungiDocumento(libro1);
+            biblioteca.AggiungiDocumento(libro2);
+            biblioteca.AggiungiDocumento(libro3);
+
+            var libro = biblioteca.CercaDocumento("50057");
+
+            
+            Console.WriteLine(libro.titolo);
+
+
 
             DateTime dataInizio = DateTime.Today;
             DateTime dataFine = dataInizio.AddDays(10);
             Prestito prestito1 = new Prestito("02145", "harry potter e la camera dei segreti", dataInizio, dataFine, "luca", "rossi");
+            Prestito prestito2 = new Prestito("021453", "harry potter e il calice di fuoco", dataInizio, dataFine, "luigi", "rossi");
             biblioteca.AggiungiPrestito(prestito1);
+            biblioteca.AggiungiPrestito(prestito2);
 
-
-            var nuovo = biblioteca.CercaDocumento("50057");
-
-
-            Console.WriteLine("titolo libro: " + nuovo.titolo);
-
-
-
-            //List<Documento> documenti = new List<Documento> ();
-            //documenti.Add (libro1);
-            
-
-            //foreach (Documento documento in documenti)
-            //{
-            //    if (documento.titolo == "il nome della rosa")
-            //        Console.WriteLine(documento.titolo);
-            //}
-
+            var prestito = biblioteca.CercaUtenteNeiPrestiti("luigi", "rossi");
+            Console.WriteLine("prestito: " +prestito.titoloLibro);
 
 
 
